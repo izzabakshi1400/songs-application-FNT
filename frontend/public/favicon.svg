@@ -1,0 +1,43 @@
+<svg
+  xmlns="http://www.w3.org/2000/svg"
+  viewBox="0 0 64 64"
+  fill="none"
+>
+  <defs>
+    <linearGradient id="g" x1="10" y1="6" x2="58" y2="58" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#2a0f17" />
+      <stop offset="0.55" stop-color="#6a1b2a" />
+      <stop offset="1" stop-color="#9a2b3f" />
+    </linearGradient>
+
+    <filter id="softGlow" x="-40%" y="-40%" width="180%" height="180%">
+      <feGaussianBlur stdDeviation="2.2" result="blur" />
+      <feColorMatrix
+        in="blur"
+        type="matrix"
+        values="1 0 0 0 0.4  0 1 0 0 0.1  0 0 1 0 0.18  0 0 0 0.9 0"
+        result="colored"
+      />
+      <feMerge>
+        <feMergeNode in="colored" />
+        <feMergeNode in="SourceGraphic" />
+      </feMerge>
+    </filter>
+  </defs>
+
+  <!-- הגדלנו רדיוס כדי שיתפוס יותר מקום -->
+  <circle cx="32" cy="32" r="31" fill="#12070c" />
+  <circle cx="32" cy="32" r="26" fill="rgba(0,0,0,0.35)" />
+
+  <g filter="url(#softGlow)">
+    <path
+      d="M16 36c4 0 4-10 8-10s4 16 8 16 4-24 8-24 4 32 8 32 4-18 8-18"
+      stroke="url(#g)"
+      stroke-width="4.2"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+    />
+  </g>
+
+  <circle cx="32" cy="32" r="3.8" fill="rgba(255,255,255,0.85)" />
+</svg>
