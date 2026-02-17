@@ -1,7 +1,7 @@
 import axios from "axios";
 
 export const api = axios.create({
-  baseURL: "http://localhost:5293",
+  baseURL: "https://songs-application-bck.onrender.com",
 });
 
 api.interceptors.request.use((config) => {
