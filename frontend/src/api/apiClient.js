@@ -1,7 +1,8 @@
 import axios from "axios";
 
 export const api = axios.create({
-  baseURL: "https://songs-application-bck.onrender.com",
+  baseURL: import.meta.env.VITE_API_BASE_URL || "http://localhost:5293",
+  timeout: 60000,
 });
 
 api.interceptors.request.use((config) => {
@@ -15,16 +16,15 @@ api.interceptors.response.use(
   (err) => {
     const status = err?.response?.status;
 
-  if (status === 401) {
-  localStorage.removeItem("token");
-  localStorage.removeItem("displayName");
-  localStorage.removeItem("username");
+    if (status === 401) {
+      localStorage.removeItem("token");
+      localStorage.removeItem("displayName");
+      localStorage.removeItem("username");
 
-  if (window.location.pathname !== "/") {
-    window.location.href = "/";
-  }
-}
-
+      if (window.location.pathname !== "/") {
+        window.location.href = "/";
+      }
+    }
 
     return Promise.reject(err);
   }
