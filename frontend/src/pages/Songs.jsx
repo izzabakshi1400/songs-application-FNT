@@ -13,6 +13,7 @@ export default function Songs() {
   const [songs, setSongs] = useState([]);
   const [error, setError] = useState("");
   const [term, setTerm] = useState("");
+  const [hasMore, setHasMore] = useState(false);
   const [recentSearches, setRecentSearches] = useState([]);
   const [loading, setLoading] = useState(false);
 
@@ -25,6 +26,7 @@ export default function Songs() {
       SESSION_TERM_KEY: `session_last_term__${username}`, 
     };
   }, [username]);
+  
 
   useEffect(() => {
     const rawRecent = localStorage.getItem(RECENT_KEY);
@@ -52,8 +54,8 @@ export default function Songs() {
     setLoading(true);
     try {
       const res = await api.get(`/api/music/search?term=${encodeURIComponent(q)}`);
-      setSongs(res.data.items);
-
+setSongs(res.data.items);
+setHasMore(res.data.items.length === 20);
       sessionStorage.setItem(SESSION_RESULTS_KEY, JSON.stringify(res.data.items));
       sessionStorage.setItem(SESSION_TERM_KEY, q);
 
@@ -148,6 +150,11 @@ export default function Songs() {
                   </td>
                 </tr>
               ))}
+{hasMore && !loading && (
+  <div style={{ marginTop: 10, opacity: 0.85 }}>
+    מוצגות 20 תוצאות ראשונות — ייתכן ויש תוצאות נוספות.
+  </div>
+)}
 
               {songs.length === 0 && !loading && (
                 <tr>

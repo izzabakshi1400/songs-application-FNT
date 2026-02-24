@@ -2,7 +2,6 @@ export function saveAuth({ token, displayName, username }) {
   localStorage.setItem("token", token);
   localStorage.setItem("displayName", displayName || "");
 
-  // ✅ username יציב למפתחות החיפוש
   if (username) localStorage.setItem("username", username);
 }
 
